@@ -1,10 +1,22 @@
 <template>
   <div>
-    <div class="post" v-for="item in posts">
-        <h3><nuxt-link :to="slugToUrl(item.slug)">{{ item.title }}</nuxt-link></h3>
-        <div v-html="item.excerpt"></div>
-        <strong class="more"><nuxt-link :to="slugToUrl(item.slug)">read more</nuxt-link></strong>
-    </div>
+    <article v-for="item in posts">
+      <header>
+        <h2 class="h4">
+          <nuxt-link :to="slugToUrl(item.slug)">{{ item.title }}</nuxt-link>
+        </h2>
+      </header>
+      
+      <section v-html="item.excerpt"></section>
+
+      <footer>
+        <div><i class="fa fa-tag"></i> tags</div>
+        <div>
+          <i class="fa fa-clock-o"></i>
+          Reading time: <b>3 mins</b>
+        </div>
+      </footer>
+    </article>
   </div>
 </template>
 
@@ -21,29 +33,4 @@ export default {
 </script>
 
 <style>
-.post {
-  margin-bottom:20px;
-}
-h3 {
-  font-size:54px;
-  font-weight:bold;
-  line-height: 64px;
-}
-h3 a {
-  text-decoration: none;
-  color:#444;
-}
-p {
-  font-size:24px;
-  line-height: 150%;
-}
-.link-more {
-    display:none;
-}
-
-.more a {
-  font-size:22px;
-  color:#1e5799;
-}
-
 </style>

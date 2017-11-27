@@ -93,6 +93,36 @@ export default {
     });
   },
   /**
+   * Return all portfolio
+   * @param  string slug Portfolio slug (e.g. 'hello-world')
+   * @return Promise Filtered response
+   */
+  getPortfolio() {
+    console.log("Request to portfolio");
+    return new Promise((resolve, reject) => {
+      request.defaults.baseURL = this.baseUrl;
+      request.get(`portfolio`).then(response => {
+        const data = [...response.data];
+        if (response.status === 200 && response.data.length > 0) {
+          const filtered = {
+            total: response.headers["x-wp-total"],
+            totalPages: response.headers["x-wp-totalpages"],
+            data: data.map(item => ({
+              id: item.id,
+              title: item.title.rendered,
+              content: item.content.rendered,
+              excerpt: item.excerpt.rendered,
+              slug: item.slug
+            }))
+          };
+          resolve(filtered);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+  /**
    * Returns category data and all posts under it (paginated)
    * @param  string slug Category slug (e.g. 'news')
    * @return Promise Filtered response

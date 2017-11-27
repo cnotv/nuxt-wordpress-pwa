@@ -24,14 +24,4 @@ export default {
 </script>
 
 <style scoped>
-
-h3 {
-  font-size:22px;
-}
-a {
-  color:#444;
-}
-a.nuxt-link-active {
-  color:#ccc;
-}
 </style>
